@@ -1,5 +1,5 @@
 import Task from "../../../task/domain/Task";
-import {TaskStatus} from "../../../task/domain/utils";
+import {TaskStatus} from "../../../task/domain/types";
 
 describe("Task domain model", () => {
   it("should create a task with a pending status", () => {

@@ -1,4 +1,4 @@
-import {TaskStatus} from "./utils";
+import {TaskStatus} from "./types";
 
 class Task {
   // Id: number;
