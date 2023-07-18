@@ -1,13 +1,13 @@
-import {TaskStatus} from './types';
+import {TaskStatus} from "./utils";
 
 class Task {
-  // id: number;
+  // Id: number;
   status: TaskStatus;
 
   constructor(
     public title: string,
     public description: string,
-    public dueDate: Date,
+    public dueDate: Date
   ) {
     this.status = TaskStatus.PENDING;
   }
