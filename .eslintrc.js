@@ -1,21 +1,25 @@
+/* eslint-disable sort-keys */
 module.exports = {
-  'env': {
-    'es2021': true,
-    'node': true,
+  "env": {
+    "es2021": true,
+    "node": true
   },
-  'extends': [
-    'google',
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
   ],
-  'parser': '@typescript-eslint/parser',
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module',
-  },
-  'plugins': [
-    '@typescript-eslint',
+  "overrides": [
+    {
+      "files": ["**/*.test.ts"],
+      "env": {"jest": true}
+    }
   ],
-  'rules': {
-    'require-jsdoc': 'off',
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
+  "rules": {}
 };
 
