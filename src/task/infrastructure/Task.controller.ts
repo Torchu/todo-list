@@ -1,6 +1,8 @@
 import promptSync from 'prompt-sync';
+import Table from 'cli-table3';
 import createTask from "../application/createTask";
 import TaskJsonRepository from "./TaskJson.repository";
+import listTasks from '../application/listTasks';
 
 /**
  * This class is responsible for the connection between the user inputs and the application logic.
@@ -21,6 +23,20 @@ class TaskController {
 
         const task = createTask(new TaskJsonRepository('./data/tasks.json'), {title, description, dueDate});
         console.log(`Task created with ID ${task.id}`);
+    }
+
+    /**
+     * Lists the tasks in a user-friendly way
+     */
+    list() {
+        const tasks = listTasks(new TaskJsonRepository('./data/tasks.json'));
+        const table = new Table({
+            head: ['ID', 'Title', 'Description', 'Due Date', 'Status']
+        });
+        tasks.forEach(task => {
+            table.push([task.id, task.title, task.description, task.dueDate.toDateString(), task.status]);
+        });
+        console.log(table.toString());
     }
 }
 

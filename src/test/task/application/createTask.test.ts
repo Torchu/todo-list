@@ -3,7 +3,7 @@ import { TaskStatus } from "../../../task/domain/types";
 import TaskJsonRepository from "../../../task/infrastructure/TaskJson.repository";
 import { persistanceCleanup } from "../../setup";
 
-describe("Crate task use case", () => {
+describe("Create task use case", () => {
     afterEach(() => {
         persistanceCleanup('./data/tasks.test.json');
     });

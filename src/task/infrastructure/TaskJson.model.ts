@@ -7,7 +7,7 @@ interface TaskModel {
     id: TaskId;
     title: string;
     description: string;
-    dueDate: Date;
+    dueDate: string;
     status: TaskStatus;
 }
 

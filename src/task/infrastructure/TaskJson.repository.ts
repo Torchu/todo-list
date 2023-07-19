@@ -47,6 +47,13 @@ class TaskJsonRepository implements TaskRepository {
     }
 
     /**
+     * Transforms a TaskModel object into a Task object.
+     */
+    private toDomain(task: TaskModel): Task {
+        return new Task(task.title, task.description, new Date(task.dueDate), task.status, task.id);
+    }
+
+    /**
      * Saves the tasks to the persistance datafile and generates its ID.
      * 
      * @param task Task to save.
@@ -58,13 +65,22 @@ class TaskJsonRepository implements TaskRepository {
             id: this.nextId++,
             title: task.title,
             description: task.description,
-            dueDate: task.dueDate,
+            dueDate: task.dueDate.toISOString(),
             status: task.status
         }
         this.tasks.push(newTask);
         this.saveData();
 
-        return new Task(newTask.title, newTask.description, newTask.dueDate, newTask.status, newTask.id);
+        return this.toDomain(newTask);
+    }
+
+    /**
+     * Lists the tasks in the repository.
+     * 
+     * @returns A list of Task objects.
+     */
+    list(): Task[] {
+        return this.tasks.map(task => this.toDomain(task));
     }
 }
 
