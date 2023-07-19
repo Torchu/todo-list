@@ -1,15 +1,16 @@
-import {TaskStatus} from "./types";
+import {TaskId, TaskStatus} from "./types";
 
+/**
+ * Class that represents the task entity.
+ */
 class Task {
-  // Id: number;
-  status: TaskStatus;
-
   constructor(
     public title: string,
     public description: string,
-    public dueDate: Date
+    public dueDate: Date,
+    public status: TaskStatus,
+    public id?: TaskId,
   ) {
-    this.status = TaskStatus.PENDING;
   }
 }
 
