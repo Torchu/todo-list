@@ -1,8 +1,10 @@
 .gitignore
-Readme.md
-node_modules/
+.git/
 .github/
-Dockerfile
-docker-compose.yml
+node_modules/
 .dockerignore
+docker-compose.yml
+Dockerfile*
+Makefile
 data/**/*
+Readme.md
