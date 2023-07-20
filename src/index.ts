@@ -13,6 +13,7 @@ const menu = () => {
         "1": taskController.create,
         "2": taskController.list,
         "3": taskController.update,
+        "4": taskController.complete,
         "0": exit
     };
     let option = "";
@@ -22,6 +23,7 @@ const menu = () => {
             "\n1. Create a task"+
             "\n2. List the tasks"+
             "\n3. Update a task"+
+            "\n4. Complete a task"+
             "\n0. Exit")
         option = prompt("");
         if (!(option in optionsMap)) {

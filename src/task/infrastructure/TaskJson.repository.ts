@@ -2,6 +2,7 @@ import Task from "../domain/Task";
 import fs from "fs";
 import TaskModel from "./TaskJson.model";
 import TaskRepository from "./TaskRepository.interface";
+import { TaskStatus } from "../domain/types";
 
 /**
  * Repository that manages the connection with the persistance JSON file.
@@ -105,6 +106,27 @@ class TaskJsonRepository implements TaskRepository {
      */
     list(): Task[] {
         return this.tasks.map(task => this.toDomain(task));
+    }
+
+    /**
+     * Completes a task in the repository.
+     * 
+     * @param id ID of the task to complete.
+     * 
+     * @returns The completed task.
+     */
+    complete(id: number): Task {
+        // Find the task with the given ID.
+        const taskIdx = this.tasks.findIndex(task => task.id === id);
+        if (taskIdx === -1) {
+            throw new Error(`Task with ID ${id} not found.`);
+        }
+
+        // Update the task.
+        this.tasks[taskIdx].status = TaskStatus.COMPLETED;
+
+        this.saveData();
+        return this.toDomain(this.tasks[taskIdx]);
     }
 }
 

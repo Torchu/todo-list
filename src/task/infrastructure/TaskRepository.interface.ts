@@ -7,6 +7,7 @@ interface TaskRepository {
     create(task: Task): Task;
     update(id: number, task: Task): Task;
     list(): Task[];
+    complete(id: number): Task;
 }
 
 export default TaskRepository;

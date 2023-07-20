@@ -4,6 +4,7 @@ import createTask from "../application/createTask";
 import TaskJsonRepository from "./TaskJson.repository";
 import listTasks from '../application/listTasks';
 import updateTask from '../application/updateTask';
+import completeTask from '../application/completeTask';
 
 /**
  * This class is responsible for the connection between the user inputs and the application logic.
@@ -60,6 +61,21 @@ class TaskController {
         
         const task = updateTask(new TaskJsonRepository('./data/tasks.json'), id, {title, description, dueDate});
         console.log(`Task updated with ID ${task.id}`);
+    }
+
+    /**
+     * Completes a task asking the user for the task ID.
+     */
+    complete() {
+        const prompt = promptSync();
+
+        const id = parseInt(prompt("Enter the ID of the task: "));
+        if (isNaN(id)) {
+            throw new Error("Invalid ID");
+        }
+
+        const task = completeTask(new TaskJsonRepository('./data/tasks.json'), id);
+        console.log(`Task completed with ID ${task.id}`);
     }
 }
 

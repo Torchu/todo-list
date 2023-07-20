@@ -77,4 +77,29 @@ describe("TaskJsonRepository", () => {
             status: TaskStatus.PENDING
         }]);
     });
+
+    it("should complete a task stored in a file", () => {
+        const newDate = new Date();
+        createTestTask(filePath, newDate);
+
+        const repository = new TaskJsonRepository(filePath);
+        const task = repository.complete(1);
+
+        expect(task).toMatchObject({
+            id: 1,
+            title: "Test",
+            description: "Test description",
+            dueDate: newDate,
+            status: TaskStatus.COMPLETED
+        });
+
+        const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        expect(storedTasks).toMatchObject([{
+            id: 1,
+            title: "Test",
+            description: "Test description",
+            dueDate: newDate.toISOString(),
+            status: TaskStatus.COMPLETED
+        }]);
+    });
 });

@@ -1,5 +1,4 @@
 import Task from "../domain/Task";
-import { TaskStatus } from "../domain/types";
 import TaskRepository from "../infrastructure/TaskRepository.interface";
 
 /**
