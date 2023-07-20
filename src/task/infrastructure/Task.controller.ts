@@ -5,6 +5,7 @@ import TaskJsonRepository from "./TaskJson.repository";
 import listTasks from '../application/listTasks';
 import updateTask from '../application/updateTask';
 import completeTask from '../application/completeTask';
+import deleteTask from '../application/deleteTask';
 
 /**
  * This class is responsible for the connection between the user inputs and the application logic.
@@ -76,6 +77,21 @@ class TaskController {
 
         const task = completeTask(new TaskJsonRepository('./data/tasks.json'), id);
         console.log(`Task completed with ID ${task.id}`);
+    }
+
+    /**
+     * Deletes a task asking the user for the task ID.
+     */
+    delete() {
+        const prompt = promptSync();
+
+        const id = parseInt(prompt("Enter the ID of the task: "));
+        if (isNaN(id)) {
+            throw new Error("Invalid ID");
+        }
+
+        deleteTask(new TaskJsonRepository('./data/tasks.json'), id);
+        console.log(`Task deleted with ID ${id}`);
     }
 }
 

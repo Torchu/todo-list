@@ -61,6 +61,15 @@ describe("TaskJsonRepository", () => {
         }]);
     });
 
+    it("should delete a task stored in a file", () => {
+        createTestTask(filePath, new Date());
+
+        const repository = new TaskJsonRepository(filePath);
+        repository.delete(1);
+
+        const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        expect(storedTasks).toMatchObject([]);
+    });
 
     it("should list the tasks stored in a file", () => {
         const newDate = new Date();

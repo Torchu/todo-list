@@ -6,6 +6,7 @@ import Task from "../domain/Task";
 interface TaskRepository {
     create(task: Task): Task;
     update(id: number, task: Task): Task;
+    delete(id: number): void;
     list(): Task[];
     complete(id: number): Task;
 }

@@ -100,6 +100,23 @@ class TaskJsonRepository implements TaskRepository {
     }
 
     /**
+     * Deletes a task from the repository.
+     * 
+     * @param id ID of the task to delete.
+     */
+    delete(id: number): void {
+        // Find the task with the given ID.
+        const taskIdx = this.tasks.findIndex(task => task.id === id);
+        if (taskIdx === -1) {
+            throw new Error(`Task with ID ${id} not found.`);
+        }
+
+        // Delete the task.
+        this.tasks.splice(taskIdx, 1);
+        this.saveData();
+    }
+
+    /**
      * Lists the tasks in the repository.
      * 
      * @returns A list of Task objects.
