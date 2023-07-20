@@ -1,7 +1,7 @@
 import Task from "../domain/Task";
 import fs from "fs";
 import TaskModel from "./TaskJson.model";
-import TaskRepository from "./TaskRepository.interface";
+import TaskRepository from "../domain/TaskRepository.interface";
 import { TaskStatus } from "../domain/types";
 
 /**

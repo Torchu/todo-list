@@ -1,5 +1,5 @@
 import { TaskId } from "../domain/types";
-import TaskRepository from "../infrastructure/TaskRepository.interface";
+import TaskRepository from "../domain/TaskRepository.interface";
 
 /**
  * Completes the task with the given ID

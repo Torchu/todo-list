@@ -1,4 +1,4 @@
-import Task from "../domain/Task";
+import Task from "./Task";
 
 /**
  * Interface that represents a repository of tasks.

@@ -1,6 +1,6 @@
 import Task from "../domain/Task";
 import { TaskId } from "../domain/types";
-import TaskRepository from "../infrastructure/TaskRepository.interface";
+import TaskRepository from "../domain/TaskRepository.interface";
 
 /**
  * Updates a task with the given data.

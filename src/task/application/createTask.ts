@@ -1,5 +1,5 @@
 import Task from "../domain/Task";
-import TaskRepository from "../infrastructure/TaskRepository.interface";
+import TaskRepository from "../domain/TaskRepository.interface";
 
 /**
  * Creates a task with the given data.
