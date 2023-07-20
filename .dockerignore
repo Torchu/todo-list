@@ -1,0 +1,8 @@
+.gitignore
+Readme.md
+node_modules/
+.github/
+Dockerfile
+docker-compose.yml
+.dockerignore
+data/**/*

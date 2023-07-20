@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+  lint:
+    build:
+      context: .
+      dockerfile: Dockerfile.lint
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
