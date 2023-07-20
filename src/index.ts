@@ -12,11 +12,17 @@ const menu = () => {
     const optionsMap: Record<string, () => void> = {
         "1": taskController.create,
         "2": taskController.list,
+        "3": taskController.update,
         "0": exit
     };
     let option = "";
     while (option !== "0") {
-        console.log("Select an option: \n1. Create a task\n2. List the tasks\n0. Exit")
+        console.log(
+            "Select an option: "+
+            "\n1. Create a task"+
+            "\n2. List the tasks"+
+            "\n3. Update a task"+
+            "\n0. Exit")
         option = prompt("");
         option in optionsMap ? optionsMap[option]() : console.log("Invalid option");
     }

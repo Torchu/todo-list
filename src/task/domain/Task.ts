@@ -8,7 +8,7 @@ class Task {
     public title: string,
     public description: string,
     public dueDate: Date,
-    public status: TaskStatus,
+    public status: TaskStatus = TaskStatus.PENDING,
     public id?: TaskId,
   ) {
   }

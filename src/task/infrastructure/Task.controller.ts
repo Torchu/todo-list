@@ -3,6 +3,7 @@ import Table from 'cli-table3';
 import createTask from "../application/createTask";
 import TaskJsonRepository from "./TaskJson.repository";
 import listTasks from '../application/listTasks';
+import updateTask from '../application/updateTask';
 
 /**
  * This class is responsible for the connection between the user inputs and the application logic.
@@ -37,6 +38,28 @@ class TaskController {
             table.push([task.id, task.title, task.description, task.dueDate.toDateString(), task.status]);
         });
         console.log(table.toString());
+    }
+
+    /**
+     * Updates a task asking the user for the data and the task ID.
+     */
+    update() {
+        const prompt = promptSync();
+
+        const id = parseInt(prompt("Enter the ID of the task: "));
+        if (isNaN(id)) {
+            throw new Error("Invalid ID");
+        }
+
+        const title = prompt("Enter the new title of the task: ");
+        const description = prompt("Enter the new description of the task: ");
+        const dueDate = new Date(Date.parse(prompt("Enter the new due date of the task in YYYY-MM-DD format: ")));
+        if (!dueDate) {
+            throw new Error("Invalid date. The correct format is YYYY-MM-DD");
+        }
+        
+        const task = updateTask(new TaskJsonRepository('./data/tasks.json'), id, {title, description, dueDate});
+        console.log(`Task updated with ID ${task.id}`);
     }
 }
 

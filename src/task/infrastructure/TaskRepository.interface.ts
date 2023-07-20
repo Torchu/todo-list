@@ -5,6 +5,7 @@ import Task from "../domain/Task";
  */
 interface TaskRepository {
     create(task: Task): Task;
+    update(id: number, task: Task): Task;
     list(): Task[];
 }
 

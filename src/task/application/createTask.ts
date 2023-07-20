@@ -14,7 +14,7 @@ function createTask(
     repository: TaskRepository,
     data: {title: string, description: string, dueDate: Date}
 ): Task {
-    const newTask = new Task(data.title, data.description, data.dueDate, TaskStatus.PENDING);
+    const newTask = new Task(data.title, data.description, data.dueDate);
     return repository.create(newTask);
 }
 

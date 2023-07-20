@@ -75,6 +75,30 @@ class TaskJsonRepository implements TaskRepository {
     }
 
     /**
+     * Updates a task in the repository.
+     * 
+     * @param id ID of the task to update.
+     * @param task Task with the new data.
+     * 
+     * @returns The updated task.
+     */
+    update(id: number, task: Task): Task {
+        // Find the task with the given ID.
+        const taskIdx = this.tasks.findIndex(task => task.id === id);
+        if (taskIdx === -1) {
+            throw new Error(`Task with ID ${id} not found.`);
+        }
+
+        // Update the task.
+        this.tasks[taskIdx].title = task.title;
+        this.tasks[taskIdx].description = task.description;
+        this.tasks[taskIdx].dueDate = task.dueDate.toISOString();
+
+        this.saveData();
+        return this.toDomain(this.tasks[taskIdx]);
+    }
+
+    /**
      * Lists the tasks in the repository.
      * 
      * @returns A list of Task objects.
