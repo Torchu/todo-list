@@ -18,13 +18,21 @@ const menu = () => {
     let option = "";
     while (option !== "0") {
         console.log(
-            "Select an option: "+
+            "\nSelect an option: "+
             "\n1. Create a task"+
             "\n2. List the tasks"+
             "\n3. Update a task"+
             "\n0. Exit")
         option = prompt("");
-        option in optionsMap ? optionsMap[option]() : console.log("Invalid option");
+        if (!(option in optionsMap)) {
+            console.error("Invalid option")
+            continue;
+        }
+        try {
+            optionsMap[option]();
+        } catch (e) {
+            console.log((e as Error).message);
+        }
     }
 };
 
