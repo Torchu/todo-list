@@ -19,13 +19,13 @@ class TaskController {
 
         const title = prompt("Enter the title of the task: ");
         const description = prompt("Enter the description of the task: ");
-        const dueDate = new Date(Date.parse(prompt("Enter the due date of the task in YYYY-MM-DD format: ")));
-        if (!dueDate) {
+        try {
+            const dueDate = new Date(Date.parse(prompt("Enter the due date of the task in YYYY-MM-DD format: ")));
+            const task = createTask(new TaskJsonRepository('./data/tasks.json'), {title, description, dueDate});
+            console.log(`Task created with ID ${task.id}`);
+        } catch (error) {
             throw new Error("Invalid date. The correct format is YYYY-MM-DD");
         }
-
-        const task = createTask(new TaskJsonRepository('./data/tasks.json'), {title, description, dueDate});
-        console.log(`Task created with ID ${task.id}`);
     }
 
     /**
@@ -55,13 +55,13 @@ class TaskController {
 
         const title = prompt("Enter the new title of the task: ");
         const description = prompt("Enter the new description of the task: ");
-        const dueDate = new Date(Date.parse(prompt("Enter the new due date of the task in YYYY-MM-DD format: ")));
-        if (!dueDate) {
+        try{
+            const dueDate = new Date(Date.parse(prompt("Enter the new due date of the task in YYYY-MM-DD format: ")));
+            const task = updateTask(new TaskJsonRepository('./data/tasks.json'), id, {title, description, dueDate});
+            console.log(`Task updated with ID ${task.id}`);
+        } catch (error) {
             throw new Error("Invalid date. The correct format is YYYY-MM-DD");
         }
-        
-        const task = updateTask(new TaskJsonRepository('./data/tasks.json'), id, {title, description, dueDate});
-        console.log(`Task updated with ID ${task.id}`);
     }
 
     /**

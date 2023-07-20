@@ -61,6 +61,13 @@ describe("TaskJsonRepository", () => {
         }]);
     });
 
+    it("should throw an exception when updating a task that doesn't exist", () => {
+        const repository = new TaskJsonRepository(filePath);
+        const task = new Task("Updated", "Test description", new Date());
+
+        expect(() => repository.update(1, task)).toThrow("Task with ID 1 not found.");
+    });
+
     it("should delete a task stored in a file", () => {
         createTestTask(filePath, new Date());
 
@@ -69,6 +76,12 @@ describe("TaskJsonRepository", () => {
 
         const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         expect(storedTasks).toMatchObject([]);
+    });
+
+    it("should throw an exception when deleting a task that doesn't exist", () => {
+        const repository = new TaskJsonRepository(filePath);
+
+        expect(() => repository.delete(1)).toThrow("Task with ID 1 not found.");
     });
 
     it("should list the tasks stored in a file", () => {
@@ -110,5 +123,11 @@ describe("TaskJsonRepository", () => {
             dueDate: newDate.toISOString(),
             status: TaskStatus.COMPLETED
         }]);
+    });
+
+    it("should throw an exception when completing a task that doesn't exist", () => {
+        const repository = new TaskJsonRepository(filePath);
+
+        expect(() => repository.complete(1)).toThrow("Task with ID 1 not found.");
     });
 });
