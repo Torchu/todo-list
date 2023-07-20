@@ -2,13 +2,13 @@ import fs from "fs";
 import Task from "../../../task/domain/Task";
 import { TaskStatus } from "../../../task/domain/types";
 import TaskJsonRepository from "../../../task/infrastructure/TaskJson.repository";
-import { createTestTask, persistanceCleanup } from "../../setup";
+import { createTestTask, getStoredTasks, persistanceCleanup } from "../../setup";
 
 describe("TaskJsonRepository", () => {
-    const filePath = "./data/tasks.test.json";
+    const filePath = "tasks.test.json";
 
     afterEach(() => {
-        persistanceCleanup("./data/tasks.test.json");
+        persistanceCleanup("tasks.test.json");
     });
 
     it("should create a task and store it in a file", () => {
@@ -25,7 +25,7 @@ describe("TaskJsonRepository", () => {
             status: TaskStatus.PENDING
         });
 
-        const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const storedTasks = getStoredTasks(filePath);
         expect(storedTasks).toMatchObject([{
             id: 1,
             title: "Test",
@@ -51,7 +51,7 @@ describe("TaskJsonRepository", () => {
             status: TaskStatus.PENDING
         });
 
-        const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const storedTasks = getStoredTasks(filePath);
         expect(storedTasks).toMatchObject([{
             id: 1,
             title: "Updated",
@@ -74,7 +74,7 @@ describe("TaskJsonRepository", () => {
         const repository = new TaskJsonRepository(filePath);
         repository.delete(1);
 
-        const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const storedTasks = getStoredTasks(filePath);
         expect(storedTasks).toMatchObject([]);
     });
 
@@ -115,7 +115,7 @@ describe("TaskJsonRepository", () => {
             status: TaskStatus.COMPLETED
         });
 
-        const storedTasks = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const storedTasks = getStoredTasks(filePath);
         expect(storedTasks).toMatchObject([{
             id: 1,
             title: "Test",

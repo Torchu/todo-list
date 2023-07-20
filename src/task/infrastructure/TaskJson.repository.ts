@@ -9,6 +9,11 @@ import { TaskStatus } from "../domain/types";
  */
 class TaskJsonRepository implements TaskRepository {
     /**
+     * Base path to the persistance datafile.
+     */
+    private static readonly BASE_PATH = './data/';
+
+    /**
      * List of tasks in the system.
      */
     private tasks: TaskModel[];
@@ -29,13 +34,13 @@ class TaskJsonRepository implements TaskRepository {
      * @param filePath Path to the persistance datafile.
      */
     constructor(filePath: string) {
-        this.filePath = filePath;
+        this.filePath = `${TaskJsonRepository.BASE_PATH}${filePath}`;
 
         // If it doesn't exist, create the file.
-        if (!fs.existsSync(filePath)) {
-            fs.writeFileSync(filePath, '', 'utf-8');
+        if (!fs.existsSync(this.filePath)) {
+            fs.writeFileSync(this.filePath, '', 'utf-8');
         }
-        const data = fs.readFileSync(filePath, 'utf-8');
+        const data = fs.readFileSync(this.filePath, 'utf-8');
         this.tasks = data? JSON.parse(data) : [];
         this.nextId = (this.tasks.at(-1)?.id ?? 0) + 1;
     }

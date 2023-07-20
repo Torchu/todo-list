@@ -4,7 +4,7 @@ import TaskJsonRepository from "../../../task/infrastructure/TaskJson.repository
 import { createTestTask, persistanceCleanup } from "../../setup";
 
 describe("Update task use case", () => {
-    const filePath = './data/tasks.test.json';
+    const filePath = 'tasks.test.json';
     afterEach(() => {
         persistanceCleanup(filePath);
     });

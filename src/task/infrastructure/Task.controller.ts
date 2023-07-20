@@ -21,7 +21,7 @@ class TaskController {
         const description = prompt("Enter the description of the task: ");
         try {
             const dueDate = new Date(Date.parse(prompt("Enter the due date of the task in YYYY-MM-DD format: ")));
-            const task = createTask(new TaskJsonRepository('./data/tasks.json'), {title, description, dueDate});
+            const task = createTask(new TaskJsonRepository('tasks.json'), {title, description, dueDate});
             console.log(`Task created with ID ${task.id}`);
         } catch (error) {
             throw new Error("Invalid date. The correct format is YYYY-MM-DD");
@@ -32,7 +32,7 @@ class TaskController {
      * Lists the tasks in a user-friendly way
      */
     list() {
-        const tasks = listTasks(new TaskJsonRepository('./data/tasks.json'));
+        const tasks = listTasks(new TaskJsonRepository('tasks.json'));
         const table = new Table({
             head: ['ID', 'Title', 'Description', 'Due Date', 'Status']
         });
@@ -57,7 +57,7 @@ class TaskController {
         const description = prompt("Enter the new description of the task: ");
         try{
             const dueDate = new Date(Date.parse(prompt("Enter the new due date of the task in YYYY-MM-DD format: ")));
-            const task = updateTask(new TaskJsonRepository('./data/tasks.json'), id, {title, description, dueDate});
+            const task = updateTask(new TaskJsonRepository('tasks.json'), id, {title, description, dueDate});
             console.log(`Task updated with ID ${task.id}`);
         } catch (error) {
             throw new Error("Invalid date. The correct format is YYYY-MM-DD");
@@ -75,7 +75,7 @@ class TaskController {
             throw new Error("Invalid ID");
         }
 
-        const task = completeTask(new TaskJsonRepository('./data/tasks.json'), id);
+        const task = completeTask(new TaskJsonRepository('tasks.json'), id);
         console.log(`Task completed with ID ${task.id}`);
     }
 
@@ -90,7 +90,7 @@ class TaskController {
             throw new Error("Invalid ID");
         }
 
-        deleteTask(new TaskJsonRepository('./data/tasks.json'), id);
+        deleteTask(new TaskJsonRepository('tasks.json'), id);
         console.log(`Task deleted with ID ${id}`);
     }
 }

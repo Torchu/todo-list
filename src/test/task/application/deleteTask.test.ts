@@ -3,7 +3,7 @@ import deleteTask from "../../../task/application/deleteTask";
 import TaskJsonRepository from "../../../task/infrastructure/TaskJson.repository";
 
 describe("Delete task use case", () => {
-    const filePath = './data/tasks.test.json';
+    const filePath = 'tasks.test.json';
     afterEach(() => {
         persistanceCleanup(filePath);
     });

@@ -5,13 +5,13 @@ import { persistanceCleanup } from "../../setup";
 
 describe("Create task use case", () => {
     afterEach(() => {
-        persistanceCleanup('./data/tasks.test.json');
+        persistanceCleanup('tasks.test.json');
     });
 
     it("should generate a new ID and set the status to pending", () => {
         const newDate = new Date();
         const newTask = createTask(
-            new TaskJsonRepository('./data/tasks.test.json'),
+            new TaskJsonRepository('tasks.test.json'),
             {title: 'Test title', description: 'Test description', dueDate: newDate}
         );
         expect(newTask).toMatchObject({

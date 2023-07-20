@@ -4,7 +4,7 @@ import { createTestTask, persistanceCleanup } from "../../setup";
 import { TaskStatus } from "../../../task/domain/types";
 
 describe("Complete task use case", () => {
-    const filePath = './data/tasks.test.json';
+    const filePath = 'tasks.test.json';
     afterEach(() => {
         persistanceCleanup(filePath);
     });
