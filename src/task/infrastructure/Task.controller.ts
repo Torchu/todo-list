@@ -6,6 +6,7 @@ import listTasks from '../application/listTasks';
 import updateTask from '../application/updateTask';
 import completeTask from '../application/completeTask';
 import deleteTask from '../application/deleteTask';
+import { InvalidDateError } from './InvalidDateError';
 
 /**
  * This class is responsible for the connection between the user inputs and the application logic.
@@ -19,13 +20,12 @@ class TaskController {
 
         const title = prompt("Enter the title of the task: ");
         const description = prompt("Enter the description of the task: ");
-        try {
-            const dueDate = new Date(Date.parse(prompt("Enter the due date of the task in YYYY-MM-DD format: ")));
-            const task = createTask(new TaskJsonRepository('tasks.json'), {title, description, dueDate});
-            console.log(`Task created with ID ${task.id}`);
-        } catch (error) {
-            throw new Error("Invalid date. The correct format is YYYY-MM-DD");
+        const dueDate = new Date(Date.parse(prompt("Enter the due date of the task in YYYY-MM-DD format: ")));
+        if (isNaN(dueDate.getTime())) {
+            throw new InvalidDateError();
         }
+        const task = createTask(new TaskJsonRepository('tasks.json'), {title, description, dueDate});
+        console.log(`Task created with ID ${task.id}`);
     }
 
     /**
@@ -55,13 +55,12 @@ class TaskController {
 
         const title = prompt("Enter the new title of the task: ");
         const description = prompt("Enter the new description of the task: ");
-        try{
-            const dueDate = new Date(Date.parse(prompt("Enter the new due date of the task in YYYY-MM-DD format: ")));
-            const task = updateTask(new TaskJsonRepository('tasks.json'), id, {title, description, dueDate});
-            console.log(`Task updated with ID ${task.id}`);
-        } catch (error) {
-            throw new Error("Invalid date. The correct format is YYYY-MM-DD");
+        const dueDate = new Date(Date.parse(prompt("Enter the new due date of the task in YYYY-MM-DD format: ")));
+        if (isNaN(dueDate.getTime())) {
+            throw new InvalidDateError();
         }
+        const task = updateTask(new TaskJsonRepository('tasks.json'), id, {title, description, dueDate});
+        console.log(`Task updated with ID ${task.id}`);
     }
 
     /**

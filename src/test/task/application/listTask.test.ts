@@ -1,9 +1,7 @@
-import fs from "fs";
 import listTasks from "../../../task/application/listTasks";
 import { TaskStatus } from "../../../task/domain/types";
 import { createTestTask, persistanceCleanup } from "../../setup";
 import TaskJsonRepository from "../../../task/infrastructure/TaskJson.repository";
-import { create } from "domain";
 
 describe("List tasks use case", () => {
     afterEach(() => {

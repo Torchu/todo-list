@@ -3,6 +3,7 @@ import fs from "fs";
 import TaskModel from "./TaskJson.model";
 import TaskRepository from "../domain/TaskRepository.interface";
 import { TaskStatus } from "../domain/types";
+import { TaskNotFoundError } from "./TaskNotFoundError";
 
 /**
  * Repository that manages the connection with the persistance JSON file.
@@ -92,7 +93,7 @@ class TaskJsonRepository implements TaskRepository {
         // Find the task with the given ID.
         const taskIdx = this.tasks.findIndex(task => task.id === id);
         if (taskIdx === -1) {
-            throw new Error(`Task with ID ${id} not found.`);
+            throw new TaskNotFoundError(id);
         }
 
         // Update the task.
@@ -113,7 +114,7 @@ class TaskJsonRepository implements TaskRepository {
         // Find the task with the given ID.
         const taskIdx = this.tasks.findIndex(task => task.id === id);
         if (taskIdx === -1) {
-            throw new Error(`Task with ID ${id} not found.`);
+            throw new TaskNotFoundError(id);
         }
 
         // Delete the task.
@@ -141,7 +142,7 @@ class TaskJsonRepository implements TaskRepository {
         // Find the task with the given ID.
         const taskIdx = this.tasks.findIndex(task => task.id === id);
         if (taskIdx === -1) {
-            throw new Error(`Task with ID ${id} not found.`);
+            throw new TaskNotFoundError(id);
         }
 
         // Update the task.
