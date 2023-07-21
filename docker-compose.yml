@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     stdin_open: true
+    volumes:
+      - data_volume:/app/data
   lint:
     build:
       context: .
@@ -13,3 +15,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test
+    volumes:
+      - data_test_volume:/app/data
+volumes:
+  data_volume:
+  data_test_volume:
